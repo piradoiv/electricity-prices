@@ -1,0 +1,9 @@
+#tag ColorGroup
+	CodeName=ChartGridColorGroup
+	#tag Color
+		Type=1
+		Platform=1
+		Light=000000E6
+		Dark=FFFFFFE6
+	#tag EndColor
+#tag EndColorGroup

@@ -1,0 +1,9 @@
+#tag ColorGroup
+	CodeName=WindowBackgroundColorGroup
+	#tag Color
+		Type=1
+		Platform=1
+		Light=E7E7E700
+		Dark=25252500
+	#tag EndColor
+#tag EndColorGroup

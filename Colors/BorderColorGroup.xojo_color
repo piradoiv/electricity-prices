@@ -1,0 +1,9 @@
+#tag ColorGroup
+	CodeName=BorderColorGroup
+	#tag Color
+		Type=1
+		Platform=1
+		Light=000000C0
+		Dark=FFFFFFC0
+	#tag EndColor
+#tag EndColorGroup

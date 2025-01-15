@@ -1,0 +1,8 @@
+#tag ColorGroup
+	CodeName=LinkColorGroup
+	#tag Color
+		Type=0
+		Platform=1
+		Light=084FD100
+	#tag EndColor
+#tag EndColorGroup

@@ -1,0 +1,9 @@
+#tag ColorGroup
+	CodeName=TextLabelColorGroup
+	#tag Color
+		Type=1
+		Platform=1
+		Light=00000027
+		Dark=FFFFFF27
+	#tag EndColor
+#tag EndColorGroup
