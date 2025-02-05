@@ -2,8 +2,8 @@
 Protected Class RedElectricaAPI
 	#tag Method, Flags = &h21
 		Private Function BuildURL(date As DateTime) As String
-		  Var startDate As String = date.ToString("YYYY-MM-DD") + "T00:00"
-		  Var endDate As String = date.ToString("YYYY-MM-DD") + "T23:59"
+		  Var startDate As String = date.ToString("yyyy-MM-dd") + "T00:00"
+		  Var endDate As String = date.ToString("yyyy-MM-dd") + "T23:59"
 		  
 		  Var url As String = "https://apidatos.ree.es/en/datos/mercados/precios-mercados-tiempo-real" + _
 		  "?start_date=" + startDate + "&end_date=" + endDate + "&time_trunc=hour" + _
