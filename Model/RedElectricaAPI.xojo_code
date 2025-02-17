@@ -13,10 +13,25 @@ Protected Class RedElectricaAPI
 		End Function
 	#tag EndMethod
 
-	#tag Method, Flags = &h0
-		Sub Constructor()
-		  mCache = New Dictionary
-		End Sub
+	#tag Method, Flags = &h21
+		Private Function CachedResponse(date As DateTime) As String
+		  Var f As FolderItem = CacheFileForDate(date)
+		  If Not f.Exists Then
+		    Return ""
+		  End If
+		  
+		  Var reader As TextInputStream = TextInputStream.Open(f)
+		  Var content As String = reader.ReadAll(Encodings.UTF8)
+		  reader.Close
+		  
+		  Return content
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Function CacheFileForDate(date As DateTime) As FolderItem
+		  Return SpecialFolder.Caches.Child("es.rcruz.electricityprice").Child(date.SQLDate + ".txt")
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
@@ -59,8 +74,10 @@ Protected Class RedElectricaAPI
 		    Return
 		  End If
 		  
-		  If Not mCache.HasKey(mDate.SQLDate) Then
-		    mCache.Value(mDate.SQLDate) = content
+		  If CachedResponse(mDate) = "" Then
+		    Var writer As TextOutputStream = TextOutputStream.Open(CacheFileForDate(mDate))
+		    writer.Write(content)
+		    writer.Close
 		  End If
 		  
 		  RaiseEvent PricesAvailable(New DateTime(mDate), result)
@@ -75,8 +92,9 @@ Protected Class RedElectricaAPI
 		  mDate = date
 		  Var url As String = BuildURL(date)
 		  
-		  If mCache.HasKey(date.SQLDate) Then
-		    HandlePVPCResponse(c, url, 200, mCache.Value(date.SQLDate))
+		  Var cachedContent As String = CachedResponse(date)
+		  If cachedContent <> "" Then
+		    HandlePVPCResponse(c, url, 200, cachedContent)
 		    Return
 		  End If
 		  
@@ -89,8 +107,9 @@ Protected Class RedElectricaAPI
 		  Var c As New URLConnection
 		  
 		  Var url As String = BuildURL(date)
-		  If mCache.HasKey(date.SQLDate) Then
-		    Return ExtractPricesFromResponse(mCache.Value(date.SQLDate))
+		  Var cachedContent As String = CachedResponse(date)
+		  If cachedContent <> "" Then
+		    Return ExtractPricesFromResponse(cachedContent)
 		  End If
 		  
 		  Var empty(23) As Double
@@ -113,10 +132,6 @@ Protected Class RedElectricaAPI
 		Event PricesAvailable(date As DateTime, prices() As Double)
 	#tag EndHook
 
-
-	#tag Property, Flags = &h21
-		Private mCache As Dictionary
-	#tag EndProperty
 
 	#tag Property, Flags = &h21
 		Private mDate As DateTime
