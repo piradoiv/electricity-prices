@@ -10,6 +10,7 @@ Begin DesktopWindow Window1
    HasFullScreenButton=   True
    HasMaximizeButton=   True
    HasMinimizeButton=   True
+   HasTitleBar     =   True
    Height          =   763
    ImplicitInstance=   True
    MacProcID       =   0
@@ -26,7 +27,6 @@ Begin DesktopWindow Window1
    Width           =   600
    Begin ElectricityPriceViewModel ViewModel
       Index           =   -2147483648
-      Location        =   0
       LockedInPosition=   False
       Scope           =   2
       TabPanelIndex   =   0
@@ -797,6 +797,14 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="HasTitleBar"
+		Visible=true
+		Group="Frame"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Name"
 		Visible=true
