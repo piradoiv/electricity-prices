@@ -769,7 +769,7 @@ End
 	#tag Event
 		Sub Opening()
 		  Var now As DateTime = DateTime.Now
-		  Me.MinimumDate = now.SubtractInterval(0, 0, now.Day - 1)
+		  Me.MinimumDate = now.SubtractInterval(0, 0, 40)
 		  Me.MaximumDate = If(now.Hour < 20, now, now.AddInterval(0, 0, 1))
 		End Sub
 	#tag EndEvent
